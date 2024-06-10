@@ -15,7 +15,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'nedoto-client-1.0.0.js',
     path: path.resolve(__dirname, 'dist'),
   },
   mode: 'production',
