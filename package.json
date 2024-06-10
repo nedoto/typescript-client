@@ -21,8 +21,8 @@
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch",
     "test": "jest",
-    "lint": "eslint . --ext .ts",
-    "format-check": "prettier -c .",
+    "lint": "eslint src tests --ext .ts",
+    "format-check": "prettier -c src tests",
     "format": "prettier --write ."
   },
   "author": "",
