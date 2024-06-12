@@ -2,7 +2,7 @@ import { Configuration } from './Configuration';
 import { Response } from './Response';
 import { ResponseValidator } from './ResponseValidator';
 
-export class NedotoClient {
+export default class NedotoClient {
   private readonly endpoint: string =
     'https://stage.app.nedoto.com/api/var/get/';
   private readonly apiKey: string;
@@ -32,12 +32,18 @@ export class NedotoClient {
     const json = await response.json();
 
     if (!response.ok) {
-      return new Response(response.status, [json], null);
+      return Promise.reject(new Response(response.status, [json], null));
+    }
+
+    const errors = new ResponseValidator(json).validate();
+
+    if (errors.length > 0) {
+      return Promise.reject(new Response(400, errors, null));
     }
 
     return new Response(
       response.status,
-      new ResponseValidator(json).validate(),
+      errors,
       new Configuration(
         json.variable.data.type,
         json.variable.data.value,
@@ -47,11 +53,3 @@ export class NedotoClient {
     );
   }
 }
-
-interface NedotoWindow extends Window {
-  NedotoClient: typeof NedotoClient;
-}
-
-declare let window: NedotoWindow;
-
-window.NedotoClient = NedotoClient;

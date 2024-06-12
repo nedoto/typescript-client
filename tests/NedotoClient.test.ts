@@ -1,4 +1,4 @@
-import { NedotoClient } from '../src/NedotoClient';
+import NedotoClient from '../src/NedotoClient';
 
 describe('NedotoClient', () => {
   let client: NedotoClient;
@@ -27,12 +27,14 @@ describe('NedotoClient', () => {
       json: async () => 'Not Found',
     });
 
-    const response = await client.get('test-slug');
-
-    expect(response.getStatus()).toBe(404);
-    expect(response.failed()).toEqual(true);
-    expect(response.getErrors()).toEqual(['Not Found']);
-    expect(response.getConfiguration()).toBeNull();
+    try {
+      await client.get('test-slug');
+    } catch (error: any) {
+      expect(error.getStatus()).toBe(404);
+      expect(error.failed()).toEqual(true);
+      expect(error.getErrors()).toEqual(['Not Found']);
+      expect(error.getConfiguration()).toBeNull();
+    }
   });
 
   it('returns a Response with Configuration when API returns 200 status and valid data', async () => {
@@ -61,5 +63,34 @@ describe('NedotoClient', () => {
     expect(response.getConfiguration()).not.toBeNull();
     expect(response.getConfiguration()?.getType()).toBe('string');
     expect(response.getConfiguration()?.getValue()).toBe('test-value');
+  });
+
+  it('returns a Response with Configuration when API returns is not 200 status and valid data', async () => {
+    const mockData = {
+      variable: {
+        data: {
+          value: 'test-value',
+          created_at: '2022-01-01T00:00:00Z',
+          updated_at: '2022-01-01T00:00:00Z',
+        },
+      },
+    };
+
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      status: 400,
+      json: async () => mockData,
+    });
+
+    try {
+      await client.get('test-slug');
+    } catch (error: any) {
+      expect(error.getStatus()).toBe(400);
+      expect(error.getErrors()).toEqual([
+        'Property "variable.data.type" is required, must not be null and must be a non-empty string',
+      ]);
+      expect(error.failed()).toEqual(true);
+      expect(error.getConfiguration()).toBeNull();
+    }
   });
 });

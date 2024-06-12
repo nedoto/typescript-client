@@ -9,23 +9,17 @@
     "real time config"
   ],
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Nicola Saliu",
-      "email": "hello@nedoto.com"
-    }
-  ],
+  "author": "Nicola Saliu<hello@nedoto.com>",
   "version": "1.0.0",
   "main": "src/NedotoClient.ts",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "watch": "webpack --watch",
-    "test": "jest",
+    "watch": "webpack --mode development --watch",
+    "build": "webpack --mode production",
     "lint": "eslint src tests --ext .ts",
     "format-check": "prettier -c src tests",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "jest"
   },
-  "author": "",
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.2",
@@ -38,6 +32,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "prettier": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.10",
     "ts-jest": "^29.1.4",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",

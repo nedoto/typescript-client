@@ -1,6 +1,8 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = {
+module.exports = (env, argv) => ({
+  mode: argv.mode,
   entry: './src/NedotoClient.ts',
   module: {
     rules: [
@@ -15,9 +17,16 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'nedoto-client-1.0.0.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: 'nedoto-client-1.0.0.js',
+    library: 'NedotoClient',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    globalObject: 'this',
   },
-  mode: 'production',
-  watch: true,
-};
+  watch: argv.mode === 'development',
+  optimization: {
+    minimize: argv.mode === 'production',
+    minimizer: [new TerserPlugin()],
+  },
+});
