@@ -27,9 +27,10 @@ describe('NedotoClient', () => {
       json: async () => 'Not Found',
     });
 
+    // prettier-ignore
     try {
       await client.get('test-slug');
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line
       expect(error.getStatus()).toBe(404);
       expect(error.failed()).toEqual(true);
       expect(error.getErrors()).toEqual(['Not Found']);
@@ -82,9 +83,10 @@ describe('NedotoClient', () => {
       json: async () => mockData,
     });
 
+    // prettier-ignore
     try {
       await client.get('test-slug');
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line
       expect(error.getStatus()).toBe(400);
       expect(error.getErrors()).toEqual([
         'Property "variable.data.type" is required, must not be null and must be a non-empty string',
