@@ -1,10 +1,14 @@
 # Nedoto Typescript Client
 
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE) [![ci](https://github.com/nedoto/typescript-client/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nedoto/typescript-client/actions/workflows/ci.yml)
 
 Official Typescript package to connect to Nedoto API.
 
-Nedoto website: [nedoto.com](https://nedoto.com)
+References:
+
+- Nedoto website: https://nedoto.com
+- Nedoto app website: https://app.nedoto.com
+- Nedoto documentation website: https://docs.nedoto.com
 
 ## Installation
 
