@@ -33,7 +33,7 @@ describe('NedotoClient', () => {
     } catch (error: any) { // eslint-disable-line
       expect(error.getStatus()).toBe(404);
       expect(error.failed()).toEqual(true);
-      expect(error.getErrors()).toEqual(['Not Found']);
+      expect(error.getErrors()).toEqual('Not Found');
       expect(error.getConfiguration()).toBeNull();
     }
   });

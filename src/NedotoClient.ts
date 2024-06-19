@@ -32,7 +32,7 @@ export default class NedotoClient {
     const json = await response.json();
 
     if (!response.ok) {
-      return Promise.reject(new Response(response.status, [json], null));
+      return Promise.reject(new Response(response.status, json, null));
     }
 
     const errors = new ResponseValidator(json).validate();
