@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "author": "Nicola Saliu<hello@nedoto.com>",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "src/NedotoClient.ts",
   "scripts": {
     "watch": "webpack --mode development --watch",
