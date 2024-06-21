@@ -1,5 +1,5 @@
 {
-  "name": "nedoto",
+  "name": "nedoto-client",
   "description": "Nedoto Typescript HTTP Client provide access to the Nedoto HTTP APIs",
   "keywords": [
     "nedoto",
@@ -10,14 +10,16 @@
   ],
   "license": "MIT",
   "author": "Nicola Saliu<hello@nedoto.com>",
-  "version": "1.0.2",
-  "main": "src/NedotoClient.ts",
+  "version": "1.0.3",
+  "main": "dist/NedotoClient.ts",
+  "types": "dist/NedotoClient.d.ts",
   "scripts": {
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "lint": "eslint src tests --ext .ts",
+    "lint-fix": "eslint src tests --fix --ext .ts",
     "format-check": "prettier -c src tests",
-    "format": "prettier --write .",
+    "format": "prettier --write src tests",
     "test": "jest"
   },
   "devDependencies": {

@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
+    "target": "ES6",
+    "module": "commonjs",
+    "declaration": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }
