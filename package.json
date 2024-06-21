@@ -11,8 +11,12 @@
   "license": "MIT",
   "author": "Nicola Saliu<hello@nedoto.com>",
   "version": "1.0.3",
-  "main": "dist/NedotoClient.ts",
-  "types": "dist/NedotoClient.d.ts",
+  "main": "./dist/cjs/NedotoClient.js",
+  "module": "./dist/esm/NedotoClient.js",
+  "types": "./dist/cjs/NedotoClient.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode production",
@@ -20,7 +24,9 @@
     "lint-fix": "eslint src tests --fix --ext .ts",
     "format-check": "prettier -c src tests",
     "format": "prettier --write src tests",
-    "test": "jest"
+    "test": "jest",
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "prepublishOnly": "npm run tsc"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",

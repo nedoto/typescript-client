@@ -18,7 +18,7 @@ module.exports = (env, argv) => ({
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'nedoto-client.js',
+    filename: 'index.js',
     library: 'NedotoClient',
     libraryTarget: 'umd',
     libraryExport: 'default',
