@@ -30,7 +30,7 @@ The response object is of type `Response` and with it, you can retrieve the `Con
 From the configuration object you can access your configuration value calling the `getValue()` method.
 
 ```typescript
-import { NedotoClient } from 'nedoto';
+import NedotoClient from 'nedoto-client';
 
 const nedotoClient = new NedotoClient();
 
@@ -51,7 +51,7 @@ To understand if everything went fine after retrieving your configuration, you s
 It will return a standard HTTP status.
 
 ```typescript
-import { NedotoClient } from 'nedoto';
+import NedotoClient from 'nedoto-client';
 
 const nedotoClient = new NedotoClient();
 
@@ -64,7 +64,7 @@ Alternatively you could you use the `failed()` method that will inform you if th
 value if the HTTP status code is different from 200 (HTTP OK).
 
 ```typescript
-import { NedotoClient } from 'nedoto';
+import NedotoClient from 'nedoto-client';
 
 const nedotoClient = new NedotoClient();
 
@@ -80,7 +80,7 @@ After checking if the status of the `Response` you may want to understand which 
 For this you could use the `getErrors()` method.
 
 ```typescript
-import { NedotoClient } from 'nedoto';
+import NedotoClient from 'nedoto-client';
 
 const nedotoClient = new NedotoClient();
 
@@ -105,7 +105,7 @@ the `getErrors()` method will return an array of reasons explaining why:
 To retrieve your configuration value you must use the `getConfiguration()` method.
 
 ```typescript
-import { NedotoClient } from 'nedoto';
+import NedotoClient from 'nedoto-client';
 
 const nedotoClient = new NedotoClient();
 
@@ -122,7 +122,7 @@ When you define a configuration in Nedoto you must define the `type` of your con
 To retrieve the configuration `type` you should use the `getType()` method.
 
 ```typescript
-import { NedotoClient } from 'nedoto';
+import NedotoClient from 'nedoto-client';
 
 const nedotoClient = new NedotoClient();
 
@@ -137,7 +137,7 @@ nedotoClient.get('your-slug').then((response) => {
 By using the `getCreatedAt()` you can access the creation `Date` of the configuration.
 
 ```typescript
-import { NedotoClient } from 'nedoto';
+import NedotoClient from 'nedoto-client';
 
 const nedotoClient = new NedotoClient();
 
