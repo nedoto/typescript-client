@@ -5,8 +5,10 @@ src
 .idea
 .gitignore
 tsconfig.json
+tsconfig.cjs.json
 .eslintrc.js
 .eslintignore
 .prettierrc
 .prettierrcignore
 tests
+jest.config.js
