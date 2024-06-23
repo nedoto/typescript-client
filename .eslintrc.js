@@ -10,7 +10,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-  rules: {
-    // You can add custom rules here
-  },
+  "ignorePatterns": ["node_modules/"],
+  rules: {},
 };
