@@ -11,7 +11,8 @@
   "license": "MIT",
   "author": "Nicola Saliu<hello@nedoto.com>",
   "version": "1.0.0",
-  "main": "src/NedotoClient.ts",
+  "main": "dist/nedoto-client-1.0.0.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode production",
