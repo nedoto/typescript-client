@@ -12,12 +12,10 @@ References:
 
 ## Installation
 
-This package requires `Node.js >=14.0.0` and is built for `Typescript >=4.0.0` or higher.
-
 Installation with npm:
 
 ```shell
-npm install nedoto
+npm install nedoto-client
 ```
 
 ## Usage
@@ -32,12 +30,14 @@ From the configuration object you can access your configuration value calling th
 ```typescript
 import NedotoClient from 'nedoto-client';
 
-const nedotoClient = new NedotoClient();
+const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   const configuration = response.getConfiguration();
   console.log(configuration.getValue()); // will print the value of the Configuration saved in https://app.nedoto.com/variables
-});
+}).catch ((error) => {
+  console.error(error);
+})
 ```
 
 ## The Nedoto Response
@@ -53,10 +53,12 @@ It will return a standard HTTP status.
 ```typescript
 import NedotoClient from 'nedoto-client';
 
-const nedotoClient = new NedotoClient();
+const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   console.log(response.getStatus()); // ex. 200 HTTP status code
+}).catch ((error) => {
+    console.error(error);
 });
 ```
 
@@ -66,10 +68,12 @@ value if the HTTP status code is different from 200 (HTTP OK).
 ```typescript
 import NedotoClient from 'nedoto-client';
 
-const nedotoClient = new NedotoClient();
+const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   console.log(response.failed()); // ex. true if HTTP status is different from 200
+}).catch ((error) => {
+    console.error(error);
 });
 ```
 
@@ -82,10 +86,12 @@ For this you could use the `getErrors()` method.
 ```typescript
 import NedotoClient from 'nedoto-client';
 
-const nedotoClient = new NedotoClient();
+const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   console.log(response.getErrors());
+}).catch ((error) => {
+    console.error(error);
 });
 ```
 
@@ -107,11 +113,13 @@ To retrieve your configuration value you must use the `getConfiguration()` metho
 ```typescript
 import NedotoClient from 'nedoto-client';
 
-const nedotoClient = new NedotoClient();
+const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   const configuration = response.getConfiguration();
   console.log(configuration.getValue()); // will print the value of the Configuration saved in https://app.nedoto.com/variables
+}).catch ((error) => {
+    console.error(error);
 });
 ```
 
@@ -124,11 +132,13 @@ To retrieve the configuration `type` you should use the `getType()` method.
 ```typescript
 import NedotoClient from 'nedoto-client';
 
-const nedotoClient = new NedotoClient();
+const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   const configuration = response.getConfiguration();
   console.log(configuration.getType()); // this will print the type of the configuration saved in https://app.nedoto.com/variables, ex. 'string', 'int', 'json', etc.
+}).catch ((error) => {
+    console.error(error);
 });
 ```
 
@@ -139,11 +149,13 @@ By using the `getCreatedAt()` you can access the creation `Date` of the configur
 ```typescript
 import NedotoClient from 'nedoto-client';
 
-const nedotoClient = new NedotoClient();
+const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   const configuration = response.getConfiguration();
   console.log(configuration.getCreatedAt()); // ex. 2024-02-12T16:09:21+00:00
+}).catch ((error) => {
+    console.error(error);
 });
 ```
 

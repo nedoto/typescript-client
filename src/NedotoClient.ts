@@ -3,7 +3,7 @@ import { Response } from './Response';
 import { ResponseValidator } from './ResponseValidator';
 
 export default class NedotoClient {
-  private readonly endpoint: string = 'https://app.nedoto.com/api/var/get/';
+  private readonly endpoint: string = 'https://app.nedoto.com/api/get/';
   private readonly apiKey: string;
 
   constructor(apiKey: string) {
