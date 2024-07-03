@@ -21,7 +21,7 @@ npm install nedoto-client
 ## Usage
 
 To retrieve your configuration from Nedoto API you should create a new instance of the `NedotoClient` and then use the
-Client to retrieve your configuration with the unique variable slug configured in Nedoto.
+Client to retrieve your configuration with the unique configuration slug configured in Nedoto.
 
 The response object is of type `Response` and with it, you can retrieve the `Configuration` object.
 
@@ -34,7 +34,7 @@ const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   const configuration = response.getConfiguration();
-  console.log(configuration.getValue()); // will print the value of the Configuration saved in https://app.nedoto.com/variables
+  console.log(configuration.getValue()); // will print the value of the Configuration saved in https://app.nedoto.com/configurations
 }).catch ((error) => {
   console.error(error);
 })
@@ -117,7 +117,7 @@ const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   const configuration = response.getConfiguration();
-  console.log(configuration.getValue()); // will print the value of the Configuration saved in https://app.nedoto.com/variables
+  console.log(configuration.getValue()); // will print the value of the Configuration saved in https://app.nedoto.com/configurations
 }).catch ((error) => {
     console.error(error);
 });
@@ -125,7 +125,7 @@ nedotoClient.get('your-slug').then((response) => {
 
 ### Understand the configuration type
 
-When you define a configuration in Nedoto you must define the `type` of your configuration or variable.
+When you define a configuration in Nedoto you must define the `type` of your configuration.
 
 To retrieve the configuration `type` you should use the `getType()` method.
 
@@ -136,7 +136,7 @@ const nedotoClient = new NedotoClient('your-api-key');
 
 nedotoClient.get('your-slug').then((response) => {
   const configuration = response.getConfiguration();
-  console.log(configuration.getType()); // this will print the type of the configuration saved in https://app.nedoto.com/variables, ex. 'string', 'int', 'json', etc.
+  console.log(configuration.getType()); // this will print the type of the configuration saved in https://app.nedoto.com/configurations, ex. 'string', 'int', 'json', etc.
 }).catch ((error) => {
     console.error(error);
 });
