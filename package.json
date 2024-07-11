@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "author": "Nicola Saliu<hello@nedoto.com>",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "./dist/cjs/NedotoClient.js",
   "module": "./dist/esm/NedotoClient.js",
   "types": "./dist/cjs/NedotoClient.d.ts",
