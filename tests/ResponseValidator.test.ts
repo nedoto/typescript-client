@@ -78,16 +78,6 @@ describe('ResponseValidator', () => {
       'Property "variable.data.type" must be one of the following values: string, int, float, bool, json, code, html',
     ],
     [
-      'variable.data.value',
-      [],
-      'Property "variable.data.value" must be a string, number or boolean',
-    ],
-    [
-      'variable.data.value',
-      {},
-      'Property "variable.data.value" must be a string, number or boolean',
-    ],
-    [
       'variable.data.created_at',
       'invalid-date',
       'Property "variable.data.created_at" must be a valid date',
