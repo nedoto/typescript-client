@@ -40,10 +40,12 @@ export class ResponseValidator {
         'Property "variable.data.value" is required and must not be null',
       );
     } else if (
-      typeof this.json.variable.data.value !== 'string' ||
-      typeof this.json.variable.data.value !== 'number' ||
-      typeof this.json.variable.data.value !== 'boolean' ||
-      typeof this.json.variable.data.value !== 'object'
+      !(
+        typeof this.json.variable.data.value === 'string' ||
+        typeof this.json.variable.data.value === 'number' ||
+        typeof this.json.variable.data.value === 'boolean' ||
+        typeof this.json.variable.data.value === 'object'
+      )
     ) {
       errors.push(
         'Property "variable.data.value" must be a string, number, boolean or object',
