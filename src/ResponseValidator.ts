@@ -43,7 +43,8 @@ export class ResponseValidator {
       !(
         typeof this.json.variable.data.value === 'string' ||
         typeof this.json.variable.data.value === 'number' ||
-        typeof this.json.variable.data.value === 'boolean'
+        typeof this.json.variable.data.value === 'boolean' ||
+        typeof this.json.variable.data.value === 'object'
       )
     ) {
       errors.push(
