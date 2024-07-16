@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "author": "Nicola Saliu<hello@nedoto.com>",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "./dist/cjs/NedotoClient.js",
   "module": "./dist/esm/NedotoClient.js",
   "types": "./dist/cjs/NedotoClient.d.ts",
@@ -47,5 +47,8 @@
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "pusher-js": "^8.4.0-rc2"
   }
 }
