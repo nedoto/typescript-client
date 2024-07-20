@@ -1,9 +1,9 @@
 import { Configuration } from './Configuration';
 import { Response } from './Response';
 import { ResponseValidator } from './ResponseValidator';
-import { NedotoCallbackInterface } from './NedotoCallbackInterface';
-import Pusher from 'pusher-js';
+import { RealtimeConfigurationCallbackInterface } from './RealtimeConfigurationCallbackInterface';
 import { NedotoApiResponseInterface } from './NedotoApiResponseInterface';
+import Pusher from 'pusher-js';
 
 export default class NedotoClient {
   private readonly endpoint: string = 'https://app.nedoto.com/api/get/';
@@ -38,34 +38,33 @@ export default class NedotoClient {
     const json = await response.json();
 
     if (!response.ok) {
-      return Promise.reject(new Response(response.status, json, null));
+      return Promise.reject(
+        NedotoClient.createResponse(response.status, json, null),
+      );
     }
 
     const errors = new ResponseValidator(json).validate();
 
     if (errors.length > 0) {
-      return Promise.reject(new Response(400, errors, null));
+      return Promise.reject(NedotoClient.createResponse(400, errors, null));
     }
 
-    return new Response(
+    return NedotoClient.createResponse(
       response.status,
       errors,
-      new Configuration(
-        json.variable.data.type,
-        json.variable.data.value,
-        new Date(json.variable.data.created_at),
-        new Date(json.variable.data.updated_at),
-      ),
+      NedotoClient.createConfiguration(json),
     );
   }
 
   public listen(
     channelKey: string,
     channelName: string,
-    callbacks: NedotoCallbackInterface,
+    realtimeConfigurationCallback: RealtimeConfigurationCallbackInterface,
   ): () => void {
     if (channelKey.length === 0) {
-      throw new Error('Param key is required and must be a non-empty string');
+      throw new Error(
+        'Param channelKey is required and must be a non-empty string',
+      );
     }
 
     if (channelName.length === 0) {
@@ -101,35 +100,32 @@ export default class NedotoClient {
       const errors = new ResponseValidator(apiResponse).validate();
 
       if (errors.length > 0) {
-        if (callbacks.onError) {
-          callbacks.onError(new Response(400, errors, null));
+        if (realtimeConfigurationCallback.onError) {
+          realtimeConfigurationCallback.onError(
+            NedotoClient.createResponse(400, errors, null),
+          );
         }
       } else {
-        const response = new Response(
+        const response = NedotoClient.createResponse(
           200,
           errors,
-          new Configuration(
-            apiResponse.variable.data.type,
-            apiResponse.variable.data.value,
-            new Date(apiResponse.variable.data.created_at),
-            new Date(apiResponse.variable.data.updated_at),
-          ),
+          NedotoClient.createConfiguration(apiResponse),
         );
-        if (callbacks.onVariablePushed) {
-          callbacks.onVariablePushed(response);
+        if (realtimeConfigurationCallback.onConfigurationReceived) {
+          realtimeConfigurationCallback.onConfigurationReceived(response);
         }
       }
     });
 
     channel.bind('pusher:subscription_succeeded', () => {
-      if (callbacks.onSubscriptionSucceeded) {
-        callbacks.onSubscriptionSucceeded();
+      if (realtimeConfigurationCallback.onChannelSubscriptionSucceeded) {
+        realtimeConfigurationCallback.onChannelSubscriptionSucceeded();
       }
     });
 
     channel.bind('pusher:subscription_error', (error: Response) => {
-      if (callbacks.onSubscriptionError) {
-        callbacks.onSubscriptionError(error);
+      if (realtimeConfigurationCallback.onChannelSubscriptionError) {
+        realtimeConfigurationCallback.onChannelSubscriptionError(error);
       }
     });
 
@@ -137,5 +133,28 @@ export default class NedotoClient {
     return () => {
       pusher.unsubscribe(channelName);
     };
+  }
+
+  private static createResponse(
+    httpStatusCode: number,
+    errors: string[],
+    configuration: Configuration | null,
+  ): Response {
+    return new Response(httpStatusCode, errors, configuration);
+  }
+
+  private static createConfiguration(
+    apiResponse: NedotoApiResponseInterface | null,
+  ): Configuration | null {
+    if (!apiResponse) {
+      return null;
+    }
+
+    return new Configuration(
+      apiResponse.variable.data.type,
+      apiResponse.variable.data.value,
+      new Date(apiResponse.variable.data.created_at),
+      new Date(apiResponse.variable.data.updated_at),
+    );
   }
 }
