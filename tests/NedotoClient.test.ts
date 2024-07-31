@@ -95,4 +95,16 @@ describe('NedotoClient', () => {
       expect(error.getConfiguration()).toBeNull();
     }
   });
+
+  it('throws an error when channelKey is empty', () => {
+    expect(() => client.listen('', 'non-empty-channel-name', {})).toThrow(
+      'Param channelKey is required and must be a non-empty string',
+    );
+  });
+
+  it('throws an error when channelName is empty', () => {
+    expect(() => client.listen('non-empty-channel-key', '', {})).toThrow(
+      'Param channelName is required and must be a non-empty string',
+    );
+  });
 });

@@ -4,7 +4,12 @@ export class Configuration {
   private readonly createdAt: Date;
   private readonly updatedAt: Date;
 
-  constructor(type: string, value: string, createdAt: Date, updatedAt: Date) {
+  constructor(
+    type: string,
+    value: string | number | boolean | object,
+    createdAt: Date,
+    updatedAt: Date,
+  ) {
     this.type = type;
     this.value = value;
     this.createdAt = createdAt;
