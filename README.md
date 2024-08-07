@@ -192,6 +192,13 @@ settings in real-time, etc.
 
 Note: the Response object is the same as the `get()` method.
 
+To let this example work you should have an active Configuration in Nedoto, and by accessing the Configuration details,
+you should be able to retrieve:
+
+- `api-key` (this is your api key needed to authenticate to Nedoto)
+- `key` (this is your key needed to listen to the real-time updates)
+- `channel-name` (this is your channel name where your real-time updates will be sent)
+
 ```typescript
 import NedotoClient from "nedoto-client";
 import {Response} from "nedoto-client/dist/cjs/Response";
@@ -200,7 +207,7 @@ const nedotoClient = new NedotoClient('your-api-key');
 
 const unsubscribeCallback = nedotoClient.listen(
     'your-key',
-    'your-channel-private-channel', {
+    'your-channel-name', {
 
         // will be called when the configuration is received
         onConfigurationReceived: (response: Response) => {
